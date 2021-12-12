@@ -10,9 +10,10 @@
     <button onclick="calc()"> Calculate </button>
 
     <script>
-        let days = 3;
+        let days = 256;
         let fishBirthdays = [0,0,0,0,0,0,0,0,0];
         let moveArray =     [0,0,0,0,0,0,0,0,0];
+        let totalFish = 0;
         function calc() {
             for (let i = 0; i < input.length; i++) {
                 if (input[i] == 0) {fishBirthdays[0]++;}
@@ -25,36 +26,47 @@
                 if (input[i] == 7) {fishBirthdays[7]++;}
                 if (input[i] == 8) {fishBirthdays[8]++;}
             }
+            console.log(fishBirthdays);
             
             for (let i = 0; i < days; i++) {
+                
+                let birthingFish = fishBirthdays[0];
+                console.log("birthingFish this round = " + birthingFish);
                 console.log("initial fishBirthDays[] = " + fishBirthdays + " running " + (fishBirthdays.length) + " times");
-
                 // For every element i fishBirthDays
                 for (let i = 0; i < fishBirthdays.length-1; i++) {
-                    // If element in fishBirthDays[0] is bigger then 0 then:
-                    if (i == 0 && (fishBirthdays[0] > 0)) {
-                        moveArray[8] = (fishBirthdays[i]);
-                        moveArray[6] = (fishBirthdays[i]);
-                    }
-                    // If element in fishBirthDays[0] == 0 then: 
-                    else if (i == 0 && (fishBirthdays[0] == 0)) {
-                        moveArray[8] = fishBirthdays[0];
-                        moveArray[0] = fishBirthdays[0]
-                    }
-                    // Else move fishBirthDays[i+1] to moveArray[i]:
-                    else {
-                        moveArray[i] = fishBirthdays[i+1];
-                    }
+                    moveArray[i] = fishBirthdays[i+1];
                 }
+                moveArray[8] = 0;
+                console.log("Moved [0]-[7] to the left " + moveArray);
+
+                // If there is fish in position 0 then move to position 8 and 6;
+                if (birthingFish > 0) {
+                    moveArray[8] += (birthingFish);
+                    moveArray[6] += (birthingFish);
+                }
+
+                // If element in fishBirthDays[0] == 0 then: 
+                else if (i == 0 && (fishBirthdays[0] == 0)) {
+                    moveArray[8] = 0;
+                    moveArray[0] = fishBirthdays[1];
+                }
+
                 console.log("            moveArray[] = " + moveArray);
                 fishBirthdays = moveArray;
                 console.log("");
             }
+
+            for (let i = 0; i < moveArray.length; i++) {
+                totalFish += moveArray[i]
+                
+            }
+            console.log(totalFish);
         }
 
 
 
-        let input = [3,4,3,1,2];
+        let input = [1,4,2,4,5,3,5,2,2,5,2,1,2,4,5,2,3,5,4,3,3,1,2,3,2,1,4,4,2,1,1,4,1,4,4,4,1,4,2,4,3,3,3,3,1,1,5,4,2,5,2,4,2,2,3,1,2,5,2,4,1,5,3,5,1,4,5,3,1,4,5,2,4,5,3,1,2,5,1,2,2,1,5,5,1,1,1,4,2,5,4,3,3,1,3,4,1,1,2,2,2,5,4,4,3,2,1,1,1,1,2,5,1,3,2,1,4,4,2,1,4,5,2,5,5,3,3,1,3,2,2,3,4,1,3,1,5,4,2,5,2,4,1,5,1,4,5,1,2,4,4,1,4,1,4,4,2,2,5,4,1,3,1,3,3,1,5,1,5,5,5,1,3,1,2,1,4,5,4,4,1,3,3,1,4,1,2,1,3,2,1,5,5,3,3,1,3,5,1,5,3,5,3,1,1,1,1,4,4,3,5,5,1,1,2,2,5,5,3,2,5,2,3,4,4,1,1,2,2,4,3,5,5,1,1,5,4,3,1,3,1,2,4,4,4,4,1,4,3,4,1,3,5,5,5,1,3,5,4,3,1,3,5,4,4,3,4,2,1,1,3,1,1,2,4,1,4,1,1,1,5,5,1,3,4,1,1,5,4,4,2,2,1,3,4,4,2,2,2,3];
 
 
 
