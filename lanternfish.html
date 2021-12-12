@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="calc()"> Calculate </button>
+
+    <script>
+        let days = 3;
+        let fishBirthdays = [0,0,0,0,0,0,0,0,0];
+        let moveArray =     [0,0,0,0,0,0,0,0,0];
+        function calc() {
+            for (let i = 0; i < input.length; i++) {
+                if (input[i] == 0) {fishBirthdays[0]++;}
+                if (input[i] == 1) {fishBirthdays[1]++;}
+                if (input[i] == 2) {fishBirthdays[2]++;}
+                if (input[i] == 3) {fishBirthdays[3]++;}
+                if (input[i] == 4) {fishBirthdays[4]++;}
+                if (input[i] == 5) {fishBirthdays[5]++;}
+                if (input[i] == 6) {fishBirthdays[6]++;}
+                if (input[i] == 7) {fishBirthdays[7]++;}
+                if (input[i] == 8) {fishBirthdays[8]++;}
+            }
+            
+            for (let i = 0; i < days; i++) {
+                console.log("initial fishBirthDays[] = " + fishBirthdays + " running " + (fishBirthdays.length) + " times");
+
+                // For every element i fishBirthDays
+                for (let i = 0; i < fishBirthdays.length-1; i++) {
+                    // If element in fishBirthDays[0] is bigger then 0 then:
+                    if (i == 0 && (fishBirthdays[0] > 0)) {
+                        moveArray[8] = (fishBirthdays[i]);
+                        moveArray[6] = (fishBirthdays[i]);
+                    }
+                    // If element in fishBirthDays[0] == 0 then: 
+                    else if (i == 0 && (fishBirthdays[0] == 0)) {
+                        moveArray[8] = fishBirthdays[0];
+                        moveArray[0] = fishBirthdays[0]
+                    }
+                    // Else move fishBirthDays[i+1] to moveArray[i]:
+                    else {
+                        moveArray[i] = fishBirthdays[i+1];
+                    }
+                }
+                console.log("            moveArray[] = " + moveArray);
+                fishBirthdays = moveArray;
+                console.log("");
+            }
+        }
+
+
+
+        let input = [3,4,3,1,2];
+
+
+
+    </script>
+</body>
+</html>
